@@ -1,0 +1,73 @@
+@charset "utf-8";
+body {
+  background: #ffff00;
+  font-family: sans-serif;
+  font-size: 10px
+}
+h1
+{
+	text-align: center;
+}
+form
+{
+	margin: 20px 60px;
+}
+form label
+{
+    display:block; 
+    width:100px; /* Attention : prenez une largeur suffisamment grande */
+    float:left;
+}
+table
+{
+	width: 44%;
+    margin: 48px;
+    border: 3px solid #e4d8ba;
+    border-radius: 10px;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 100px auto 0 auto;
+}
+tr th , tr td
+{
+	border: 2px solid black;
+}
+.envoyer
+{
+	display: block;
+    text-align: center;
+    margin: 16px 0px 0px 80px;
+    width: 100px;
+}
+.form_user, .form_pharmacie, .form_produit
+{
+	position: absolute;
+	width: 500px;
+	height: 300px;
+	z-index: 15;
+	top: 50%;
+	left: 45%;
+	margin: -100px 0 0 -150px;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web");
+* {
+  font-family: "Titillium Web", sans-serif;
+}
+body {
+  height: 2000px;
+}
+.navbar .navbar-brand {
+  font-size: 30px;
+}
+.navbar .nav-item {
+  padding: 10px 20px;
+}
+.navbar .nav-link {
+  font-size: 20px;
+  margin-left: 10px;
+}
+.fa-bars {
+  color: #007bff;
+  font-size: 30px;
+}

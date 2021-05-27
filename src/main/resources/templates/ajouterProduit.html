@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter produit</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.min.css"
+	th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+		th:href="@{/css/style.css}"/>
+	<script type="text/javascript" src="style.js"></script>
+</head>
+<body>
+	<section>
+		<div class="form_produit">
+			<h2>Créer un nouveau produit</h2>
+			<form class="form-horizontal" method="post" th:action="@{/produit}">
+				<label for="nom_produit" >Nom du produit :</label> <input type="text" id="nom_produit" th:value="${listProduit.nom_produit}" name="nom_produit" roleId="nom_produit"/><br/>
+			    <label for="date_expiration" >Date d'expiration :</label> <input type="text" id="date_expiration" th:value="${listProduit.date_expiration}" name="date_expiration" roleId="date_expiration" /><br/>
+			    <label for="type_produit" >Type de produit :</label> <input type="text" id="type_produit" th:value="${listProduit.type_produit}" name="type_produit" roleId="type_produit" /><br/>   
+			    <label for="description" >Description :</label> <input type="text" id="description" th:value="${listProduit.description}" name="description" roleId="description" /><br/>
+			    <button type="submit" class="envoyer">Envoyer</button>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

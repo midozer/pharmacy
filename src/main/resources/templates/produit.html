@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des produits</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.min.css"
+	th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+		th:href="@{/css/style.css}"/>
+	<script type="text/javascript" src="style.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+	  <h1>Liste des produits</h1>
+	  <a th:href="@{/ajouterProduit}">Ajouter Produit</a>        
+	  <table id="keywords" cellspacing="0" cellpadding="0">
+	    <thead>
+	      <tr>
+	        <th>Id Produit</th>
+	        <th>Nom produit</th>
+	        <th>Date d'expiration</th>
+	        <th>Type produit</th>
+	        <th>Description</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr th:each="produit : ${listProduit}">
+	        <td th:text="${produit.id_produit}"></td>
+	        <td th:text="${produit.nom_produit}"></td>
+	        <td th:text="${produit.date_expiration}"></td>
+	        <td th:text="${produit.type_produit}"></td>
+	        <td th:text="${produit.description}"></td>
+	      </tr>
+	     </tbody>
+  </table>
+ </div> 
+</body>
+</html>

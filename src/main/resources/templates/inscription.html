@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des clients</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.min.css"
+	th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+		th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header>
+	<div class="container">
+      <ul class="nav nav-tabs">
+          <li class="nav-item"><a class="nav-link active" th:href="@{/acceuil}">Acceuil</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/client}">Clients</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/produit}">Produits</a></li>
+          <li class="nav-item"><a class="nav-link " th:href="@{/inscription}">Inscription</a></li>
+          <li class="nav-item"><a class="nav-link " th:href="@{/contact}">Contactez-nous</a></li>
+        </ul>
+    </div>
+</header>
+<div class="form_user">
+	<h2>Créer un nouveau utilisateur</h2>
+	<form class="form-horizontal" method="post" th:action="@{/inscription}">
+		<label for="nom" >Nom :</label> <input type="text" id="nom" th:value="${user.nom}" name="nom" roleId="nom"/><br/>
+	    <label for="prenom" >Prenom :</label> <input type="text" id="prenom" th:value="${user.prenom}" name="prenom" roleId="prenom" /><br/>
+	    <label for="password" >Mot de passe :</label> <input type="password" id="password" th:value="${user.password}" name="password" roleId="password" /><br/>   
+	    <label for="username" >Nom d'utilisateur :</label> <input type="text" id="username" th:value="${user.username}" name="username" roleId="username" /><br/> 
+	    <label for="email" >Email :</label><input type="text" id="email" th:value="${user.email}" name="email" roleId="email" /><br/>
+	    <label for="telephone" >Téléphone :</label><input type="text" id="telephone" th:value="${user.telephone}" name="telephone" roleId="telephone" /><br/>
+	    <button type="submit" class="envoyer">Envoyer</button>
+	</form>
+</div>
+</body>
+</html>

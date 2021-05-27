@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des clients</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.min.css"
+	th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+		th:href="@{/css/style.css}"/>
+</head>
+    <body>
+        <table border="1" cellpadding="5">
+            <thead>
+                <tr>
+               		<th>Id</th>
+                	<th>Nom</th>
+                	<th>Prénom</th>
+               		<th>Téléphone</th>
+                	<th>Adresse</th>
+                	<th>Ville</th>
+                	<th>CIN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="client: ${listClient}">
+                    <td><span th:text="${client.id_client}"> Id </span></td>
+                    <td><span th:text="${client.nom_client}">Nom </span></td>
+                    <td><span th:text="${client.prenom_client}"> Prénom </span></td>
+                    <td><span th:text="${client.tele_client}"> Téléphone </span></td>
+                    <td><span th:text="${client.adresse_client}"> Adresse </span></td>
+                    <td><span th:text="${client.ville_client}"> Ville </span></td>
+                    <td><span th:text="${client.cin_client}"> CIN </span></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

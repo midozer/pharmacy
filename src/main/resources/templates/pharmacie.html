@@ -3,31 +3,36 @@
     
 <head>
     <meta charset="UTF-8">
-    <title>Liste des clients</title>
+    <title>Liste des pharmacies</title>
     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.min.css"
 	th:href="@{/css/bootstrap/bootstrap.min.css}"/>
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css"
 		th:href="@{/css/style.css}"/>
 </head>
 <body>
-	<header>
-<!-- 		<nav class="nav nav-pills nav-fill"> -->
-<!-- 		  <a class="nav-link active nav-item" href="#">Accueil</a> -->
-<!-- 		  <a class="nav-link nav-item" href="#">Pharmacies</a> -->
-<!-- 		  <a class="nav-link nav-item" href="#">Produits</a> -->
-<!-- 		  <a class="nav-link nav-item" href="#">Contact</a> -->
-<!-- 		</nav> -->
-		<iframe src="header.html" width="100%"></iframe>
-	</header>
-    <div class="form_pharmacie">
-	<h2>Créer une nouvelle pharmacie</h2>
-		<form class="form-horizontal" method="post" th:action="@{/pharmacie}">
-			<label for="nom_pharmacie" >Nom Pharmacie :</label> <input type="text" id="nom_pharmacie" th:value="${pharmacie.nom_pharmacie}" name="nom_pharmacie" roleId="nom_pharmacie"/><br/>
-		    <label for="tele_pharmacie" >Téléphone Pharmacie :</label> <input type="text" id="tele_pharmacie" th:value="${pharmacie.tele_pharmacie}" name="tele_pharmacie" roleId="tele_pharmacie" /><br/>
-		    <label for="adresse_pharmacie" >Adresse Pharmacie :</label> <input type="text" id="adresse_pharmacie" th:value="${pharmacie.adresse_pharmacie}" name="adresse_pharmacie" roleId="adresse_pharmacie" /><br/>   
-		    <label for="ville_pharmacie" >Ville Pharmacie :</label> <input type="text" id="ville_pharmacie" th:value="${pharmacie.ville_pharmacie}" name="ville_pharmacie" roleId="ville_pharmacie" /><br/> 
-		    <button type="submit" class="envoyer">Envoyer</button>
-		</form>
-	</div>
+	<div id="wrapper">
+	  <h1>Liste des pharmacies</h1>
+<!-- 	  <a th:href="@{/ajouterProduit}">Ajouter Produit</a>         -->
+	  <table id="keywords" cellspacing="0" cellpadding="0">
+		    <thead>
+		      <tr>
+		        <th>Id Pharmacie</th>
+		        <th>Nom Pharmacie</th>
+		        <th>Téléphone Pharmacie</th>
+		        <th>Adresse Pharmacie</th>
+		        <th>Ville Pharmacie</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr th:each="listPharmacie : ${pharmacie}">
+		        <td th:text="${listPharmacie.id_pharmacie}"></td>
+		        <td th:text="${listPharmacie.nom_pharmacie}"></td>
+		        <td th:text="${listPharmacie.tele_pharmacie}"></td>
+		        <td th:text="${listPharmacie.adresse_pharmacie}"></td>
+		        <td th:text="${listPharmacie.ville_pharmacie}"></td>
+		      </tr>
+		     </tbody>
+	  </table>
+	 </div> 
 </body>
 </html>

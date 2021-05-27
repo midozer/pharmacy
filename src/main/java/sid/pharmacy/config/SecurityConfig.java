@@ -47,7 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/console/**",
             "/inscription",
             "/produit",
-            "/ajouterProduit"
+            "/ajouterProduit",
+            "/pharmacie"
     };
 
     @Override

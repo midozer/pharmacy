@@ -8,8 +8,9 @@ import sid.pharmacy.Model.Pharmacie;
 
 public interface PharmacieDao extends CrudRepository<Pharmacie , Long> {
 	
-	/*
-	 * Pharmacie findByName(String nom_pharmacie); Pharmacie findByIdpharmacie(Long
-	 * id_pharmacie); List<Pharmacie> findAll();
-	 */
+	Pharmacie findByidPharmacie(Long idPharmacie);
+	Pharmacie findBynomPharmacie(String nomPharmacie);
+	Pharmacie findByadressePharmacie(String adressePharmacie);
+	
+	List<Pharmacie> findAll();
 }

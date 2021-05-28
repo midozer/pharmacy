@@ -45,6 +45,14 @@ public class Pharmacie{
 	}
 	
 	
+	public Long getIdPharmacie() {
+		return idPharmacie;
+	}
+	public void setIdPharmacie(Long idPharmacie) {
+		this.idPharmacie = idPharmacie;
+	}
+
+
 
 	public String getNomPharmacie() {
 		return nomPharmacie;

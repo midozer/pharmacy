@@ -12,7 +12,7 @@
 <body>
 	<div id="wrapper">
 	  <h1>Liste des pharmacies</h1>
-<!-- 	  <a th:href="@{/ajouterProduit}">Ajouter Produit</a>         -->
+	  <a th:href="@{/ajouterPharmacie}">Ajouter Pharmacie</a>        
 	  <table id="keywords" cellspacing="0" cellpadding="0">
 		    <thead>
 		      <tr>
@@ -24,12 +24,12 @@
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr th:each="listPharmacie : ${pharmacie}">
-		        <td th:text="${listPharmacie.id_pharmacie}"></td>
-		        <td th:text="${listPharmacie.nom_pharmacie}"></td>
-		        <td th:text="${listPharmacie.tele_pharmacie}"></td>
-		        <td th:text="${listPharmacie.adresse_pharmacie}"></td>
-		        <td th:text="${listPharmacie.ville_pharmacie}"></td>
+		      <tr th:each="pharmacies : ${pharmacie}">
+		        <td th:text="${pharmacies.id_pharmacie}"></td>
+		        <td th:text="${pharmacies.nom_pharmacie}"></td>
+		        <td th:text="${pharmacies.tele_pharmacie}"></td>
+		        <td th:text="${pharmacies.adresse_pharmacie}"></td>
+		        <td th:text="${pharmacies.ville_pharmacie}"></td>
 		      </tr>
 		     </tbody>
 	  </table>

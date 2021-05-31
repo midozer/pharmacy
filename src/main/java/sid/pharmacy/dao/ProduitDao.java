@@ -13,5 +13,5 @@ public interface ProduitDao extends CrudRepository<Produit, Long> {
 	  Produit findBytypeProduit(String typeProduit); 
 	  Produit findBynomProduit(String nomProduit); 
 	  List<Produit> findAll();
-	 
+	  void deleteBynomProduit(String nomProduit);
 }

@@ -56,4 +56,10 @@ public class UserController {
 		userService.createUser(users, userRoles);
 		return "inscription";
 	}
+	
+	@RequestMapping(value = "/acceuil", method = RequestMethod.GET)
+	public String acceuil()
+	{
+		return "acceuil";
+	}
 }

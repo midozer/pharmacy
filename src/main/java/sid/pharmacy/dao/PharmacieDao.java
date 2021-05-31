@@ -13,4 +13,6 @@ public interface PharmacieDao extends CrudRepository<Pharmacie , Long> {
 	Pharmacie findByadressePharmacie(String adressePharmacie);
 	
 	List<Pharmacie> findAll();
+	
+	void deleteBynomPharmacie(String nomPharmacie);
 }

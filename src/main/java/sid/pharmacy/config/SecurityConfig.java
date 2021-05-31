@@ -22,7 +22,7 @@ import sid.pharmacy.Service.UserSecurityService;
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+	 @Autowired 
     private Environment env; //variable session
 
     @Autowired
@@ -45,10 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/contact/**",
             "/error/**/*",
             "/console/**",
-            "/inscription",
-            "/produit",
-            "/ajouterProduit",
-            "/pharmacie"
+            "/inscription"
     };
 
     @Override

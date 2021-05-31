@@ -17,4 +17,8 @@ public interface ProduitService {
 	  public void saveProduit(Produit produit);
 	 
 	  public Produit createProduit(Produit produit);
+	  
+	  public void updateProduit(Long idProduit);
+	  
+	  public void deleteBynomProduit(String nomProduit);
 }

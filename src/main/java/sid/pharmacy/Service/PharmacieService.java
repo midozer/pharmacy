@@ -18,4 +18,8 @@ public interface PharmacieService {
 	public void savePharmacie(Pharmacie pharmacie);
 	
 	public Pharmacie createPharmacie(Pharmacie pharmacie);
+	
+	public void updatePharmacie(Long idPharmacie);
+	
+	public void deleteBynomPharmacie(String nomPharmacie);
 }

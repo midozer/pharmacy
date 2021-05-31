@@ -47,5 +47,15 @@ public class PharmacieServiceImp implements PharmacieService {
 		return pharmacieDao.findAll();
 	}
 
+	@Override
+	public void deleteBynomPharmacie(String nomPharmacie) {
+		pharmacieDao.deleteBynomPharmacie(nomPharmacie);
+	}
+
+	@Override
+	public void updatePharmacie(Long idPharmacie) {
+		pharmacieDao.findByidPharmacie(idPharmacie);
+	}
+
 	
 }

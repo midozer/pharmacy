@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import sid.pharmacy.security.Authority;
 import sid.pharmacy.security.UserRole;
 
 @Entity
@@ -31,7 +32,16 @@ public class Users implements UserDetails {
 	private String username;
 	private String email;
 	private String telephone;
+	private boolean enabled = true;
 	
+	
+
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER) //un utilisateur peut avoir plusieur role
 	@JsonIgnore //lors de lecture ou ecriture Jsonignore va ignorer la liste des roles
 	private Set<UserRole> userRoles = new HashSet<>();
@@ -118,8 +128,9 @@ public class Users implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<GrantedAuthority> authorities = new HashSet<>();
+        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
+        return authorities;
 	}
 
 
@@ -130,28 +141,28 @@ public class Users implements UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return enabled;
 	}
 
 

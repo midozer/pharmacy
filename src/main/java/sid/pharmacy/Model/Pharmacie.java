@@ -109,17 +109,4 @@ public class Pharmacie{
 	public void setPharmaciens(List<Pharmacien> pharmaciens) {
 		this.pharmaciens = pharmaciens;
 	}
-
-	
-
-	/*
-	 * public List<Pharmacien> getPharmaciens() { return pharmaciens; }
-	 * 
-	 * 
-	 * 
-	 * public void setPharmaciens(List<Pharmacien> pharmaciens) { this.pharmaciens =
-	 * pharmaciens; }
-	 * 
-	 */
-	
 }

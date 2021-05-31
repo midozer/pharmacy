@@ -47,6 +47,16 @@ public class ProduitServiceImp implements ProduitService {
 		return produitDao.save(produit);
 	}
 
+	@Override
+	public void updateProduit(Long idProduit) {
+		produitDao.findByidProduit(idProduit).getId_produit();
+	}
+
+	@Override
+	public void deleteBynomProduit(String nomProduit) {
+		produitDao.deleteBynomProduit(nomProduit);
+	}
+
 	
 
 }

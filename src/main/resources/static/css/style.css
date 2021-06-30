@@ -26,6 +26,10 @@ table
     margin-right: auto;
 	margin-left: auto;
 }
+.userConnected
+{
+	float: right;
+}
 tr th , tr td
 {
 	border: 2px solid black;
@@ -33,14 +37,23 @@ tr th , tr td
 #wrapper
 {
 	position: absolute;
-    top: 46%;
+    top: 70%;
     width: 100%;
+}
+.chercher
+{
+	margin: 0 10px;
+    width: 10%;
 }
 .section
 {
 	position: absolute;
     top: 26%;
     left: 50%;
+}
+.logged
+{
+	float: right;
 }
 .ajouterproduit
 {
@@ -59,15 +72,13 @@ tr th , tr td
     margin: 16px 0px 0px 80px;
     width: 100px;
 }
-.form_user, .form_pharmacie, .form_produit
+.form_user, .form_pharmacie, .form_produit, .form_profil
 {
 	position: absolute;
 	width: 500px;
 	height: 300px;
 	z-index: 15;
-	top: 50%;
-	left: 45%;
-	margin: -100px 0 0 -150px;
+	margin: 40px 0 0 155px;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Titillium+Web");

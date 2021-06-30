@@ -1,11 +1,9 @@
 package sid.pharmacy.Service.imp;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import sid.pharmacy.Model.Produit;
 import sid.pharmacy.Service.ProduitService;
 import sid.pharmacy.dao.ProduitDao;
@@ -18,17 +16,21 @@ public class ProduitServiceImp implements ProduitService {
 	private ProduitDao produitDao;
 
 	@Override
-	public Produit findByidProduit(Long idProduit) {
-		return produitDao.findByidProduit(idProduit);
+	public Produit findBycodeProduit(Long codeProduit) {
+		return produitDao.findBycodeProduit(codeProduit);
 	}
 
 	@Override
-	public Produit findBytypeProduit(String typeProduit) {
-		return produitDao.findBytypeProduit(typeProduit);
+	public List<Produit> findBytypeProduit(String typeProduit) {
+		if(typeProduit != null)
+		{
+			return produitDao.findBytypeProduit(typeProduit);
+		}
+		return produitDao.findAll();
 	}
 
 	@Override
-	public Produit findBynomProduit(String nomProduit) {
+	public List<Produit> findBynomProduit(String nomProduit) {
 		return produitDao.findBynomProduit(nomProduit);
 	}
 
@@ -37,8 +39,8 @@ public class ProduitServiceImp implements ProduitService {
 		produitDao.save(produit);
 	}
 
-	@Override
 	public List<Produit> findAll() {
+		
 		return produitDao.findAll();
 	}
 
@@ -48,14 +50,27 @@ public class ProduitServiceImp implements ProduitService {
 	}
 
 	@Override
-	public void updateProduit(Long idProduit) {
-		produitDao.findByidProduit(idProduit).getId_produit();
+	public void updateProduit(Long codeProduit) {
+		produitDao.findBycodeProduit(codeProduit).getCodeProduit();
 	}
 
 	@Override
 	public void deleteBynomProduit(String nomProduit) {
 		produitDao.deleteBynomProduit(nomProduit);
 	}
+
+	@Override
+	public void deleteBycodeProduit(Long codeProduit) {
+		produitDao.deleteBycodeProduit(codeProduit);
+	}
+
+	/*
+	 * @Override public List<Produit> search(String nomProduit) { if(nomProduit !=
+	 * null) { return produitDao.search(nomProduit); } return produitDao.findAll();
+	 * }
+	 */
+
+
 
 	
 

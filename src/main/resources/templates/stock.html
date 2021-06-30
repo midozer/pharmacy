@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des produits</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.min.css"
+	th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+		th:href="@{/css/style.css}"/>
+	<script type="text/javascript" src="style.js"></script>
+</head>
+<body>
+	<header>
+		<div class="container">
+	      <ul class="nav nav-tabs">
+	          <li class="nav-item"><a class="nav-link active" th:href="@{/acceuil}">Acceuil</a></li>
+	          <li class="nav-item"><a class="nav-link" th:href="@{/client}">Clients</a></li>
+	          <li class="nav-item"><a class="nav-link" th:href="@{/produit}">Produits</a></li>
+	          <li class="nav-item"><a class="nav-link " th:href="@{/inscription}">Inscription</a></li>
+	          <li class="nav-item"><a class="nav-link " th:href="@{/pharmacie}">Pharmacies</a></li>
+	      </ul>
+	    </div>
+	</header>
+	<section class="section">
+		<div class="form_stock">
+			<h2>Ajouter un nouveau produit</h2>
+			<form class="form-horizontal" method="post" data-th-action="@{/stock}" data-th-object="${stock}" accept-charset="utf-8">
+				<input type="hidden" data-th-field="*{idStock}" name="idStock" roleId="idStock"/><br/>
+				<label for="pharmacie" >Pharmacie :</label> <select th:field="*{pharmacie}">
+                           <option value="">Séléctionner une pharmacie</option>
+                           <option th:each="stock : ${listProduct}" th:value="${stock.pharmacie}" th:text="${stock.pharmacie}" />
+                        </select><br/>
+			    <button type="submit" class="envoyer">Envoyer</button>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

@@ -11,10 +11,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import sid.pharmacy.Service.UserSecurityService;
+import sid.pharmacy.Service.imp.UserServiceImp;
 
 
 @Configuration
@@ -30,6 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String SALT = "salt"; // Salt should be protected carefully
 
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new UserServiceImp();
+    }
+    
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12, new SecureRandom(SALT.getBytes()));

@@ -1,13 +1,19 @@
 package sid.pharmacy.Service.imp;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import sid.pharmacy.Model.Users;
 import sid.pharmacy.Service.UserService;
 import sid.pharmacy.dao.RoleDao;
@@ -16,7 +22,7 @@ import sid.pharmacy.security.UserRole;
 
 @Service
 @Transactional
-public class UserServiceImp implements UserService {
+public class UserServiceImp implements UserService, UserDetailsService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 	
@@ -33,10 +39,6 @@ public class UserServiceImp implements UserService {
 	@Autowired
     private BCryptPasswordEncoder passwordEncoder;
 	
-	@Override
-	public Users findByUsername(String username) {
-		return userDao.findByUsername(username);
-	}
 
 	@Override
 	public Users findByEmail(String email) {
@@ -48,10 +50,16 @@ public class UserServiceImp implements UserService {
 		return userDao.findByuserId(id);
 	}
 
-	@Override
+	
 	public void save(Users user) {
-		userDao.save(user);
-	}
+        userDao.save(user);
+		/*
+		 * user.setPassword(passwordEncoder.encode(user.getPassword()));
+		 * user.setRoles(new HashSet<>(roleDao.findAll()));
+		 */
+        //userDao.save(user);
+    }
+	 
 
 	@Override
 	public Users createUser(Users user, Set<UserRole> userRoles) {
@@ -74,6 +82,30 @@ public class UserServiceImp implements UserService {
         }
 
         return localUser;
+	}
+	
+	@Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Users user = userDao.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return new Users();
+    }
+
+	@Override
+    public Users findByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
+	
+	@Override
+	public List<Users> findAll() {
+		return userDao.findAll();
+	}
+
+	@Override
+	public Users deleteByUserId(Long userId) {
+		return userDao.deleteByUserId(userId);
 	}
 
 }

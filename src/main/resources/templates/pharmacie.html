@@ -1,29 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
-    
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des pharmacies</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.min.css"
-	th:href="@{/css/bootstrap/bootstrap.min.css}"/>
-	<link rel="stylesheet" type="text/css" href="../static/css/style.css"
-		th:href="@{/css/style.css}"/>
-</head>
+<meta charset="UTF-8" />
+<head th:replace="common/header :: common-header"/>
 <body>
-	<header>
-		<div class="container">
-	      <ul class="nav nav-tabs">
-	          <li class="nav-item"><a class="nav-link active" th:href="@{/acceuil}">Acceuil</a></li>
-	          <li class="nav-item"><a class="nav-link" th:href="@{/client}">Clients</a></li>
-	          <li class="nav-item"><a class="nav-link" th:href="@{/produit}">Produits</a></li>
-	          <li class="nav-item"><a class="nav-link " th:href="@{/inscription}">Inscription</a></li>
-	          <li class="nav-item"><a class="nav-link " th:href="@{/pharmacie}">Pharmacies</a></li>
-	        </ul>
-	    </div>
-	</header>
+<head th:replace="common/header :: navbar"/>
 	<section class="section">
 		<div class="form_pharmacie">
-			<h2>Créer un nouveau pharmacie</h2>
+			<h2>Créer une nouvelle pharmacie</h2>
 			<form class="form-horizontal" method="post" th:action="@{/pharmacie}" th:object="${pharmacie}" accept-charset="utf-8">
 				<input type="hidden" th:field="*{idPharmacie}" name="idPharmacie" roleId="idPharmacie"/><br/>
 				<label for="nomPharmacie" >Nom du pharmacie :</label> <input type="text" id="nomPharmacie" th:field="*{nomPharmacie}" name="nomPharmacie" roleId="nomPharmacie"/><br/>
@@ -39,7 +22,7 @@
 	  <table id="keywords" cellspacing="0" cellpadding="0">
 		    <thead>
 		      <tr>
-		        <th>Id Pharmacie</th>
+<!-- 		        <th>Id Pharmacie</th> -->
 		        <th>Nom Pharmacie</th>
 		        <th>Téléphone Pharmacie</th>
 		        <th>Adresse Pharmacie</th>
@@ -50,7 +33,7 @@
 		    </thead>
 		    <tbody>
 		      <tr th:each="pharmacies : ${listPharmacie}">
-		        <td th:text="${pharmacies.idPharmacie}"></td>
+<!-- 		        <td th:text="${pharmacies.idPharmacie}"></td> -->
 		        <td th:text="${pharmacies.nomPharmacie}"></td>
 		        <td th:text="${pharmacies.telePharmacie}"></td>
 		        <td th:text="${pharmacies.adressePharmacie}"></td>

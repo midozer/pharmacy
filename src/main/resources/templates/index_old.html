@@ -3,34 +3,32 @@
     
 <head>
     <meta charset="UTF-8">
+    <title>Liste des produits</title>
     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.min.css"
 	th:href="@{/css/bootstrap/bootstrap.min.css}"/>
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css"
 		th:href="@{/css/style.css}"/>
-	<script type="text/javascript" src="../static/js/style.js"></script>
+	<script type="text/javascript" src="style.js"></script>
 </head>
 <body>
 	<header>
-		<nav class="nav">
-	        <div class="container">
-	            <div class="logo">
-	                <a href="https://c8.alamy.com/compfr/m27181/pharmacie-en-boutique-pharmacie-sur-vector-illustration-sur-fond-isole-m27181.jpg"></a>
-	            </div>
-	            <div id="mainListDiv" class="main_list">
-	                <ul class="navlinks">
-	                    <li><a href="#">About</a></li>
-	                    <li><a href="#">Portfolio</a></li>
-	                    <li><a href="#">Services</a></li>
-	                    <li><a href="#">Contact</a></li>
-	                </ul>
-	            </div>
-	            <span class="navTrigger">
-	                <i></i>
-	                <i></i>
-	                <i></i>
-	            </span>
-	        </div>
-	    </nav>
+		<div class="container">
+	      <ul class="nav nav-tabs">
+	          <li class="nav-item"><a class="nav-link active" th:href="@{/acceuil}">Acceuil</a></li>
+	          <li class="nav-item"><a class="nav-link" th:href="@{/client}">Clients</a></li>
+	          <li class="nav-item"><a class="nav-link" th:href="@{/produit}">Produits</a></li>
+	          <li class="nav-item"><a class="nav-link" th:href="@{/inscription}">Inscription</a></li>
+	          <li class="nav-item"><a class="nav-link" th:href="@{/pharmacie}">Pharmacies</a></li>
+	          <li class="nav-item"><a class="nav-link" th:href="@{/profil}">Profil</a></li>
+	      </ul>
+	      <div sec:authorize="isAuthenticated()">
+	        <form id="logoutForm" method="POST" th:action="@{/logout}">
+	            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	        </form>
+	
+	        Logged user : <span sec:authentication="name"></span> | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
+	      </div>
+	    </div>
 	</header>
 	<section class="home">
 		

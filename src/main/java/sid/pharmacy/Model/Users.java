@@ -11,7 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,8 +36,11 @@ public class Users implements UserDetails {
 	private String telephone;
 	private boolean enabled = true;
 	
+	@OneToOne
+	@JoinColumn(name = "idPharmacie")
+	private Pharmacie pharmacie;
 	
-
+	
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
@@ -120,11 +125,16 @@ public class Users implements UserDetails {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 
-
+	public String getUsername() {
+		return username;
+	}
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -132,11 +142,6 @@ public class Users implements UserDetails {
         userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
         return authorities;
 	}
-
-
-
-	
-
 
 	@Override
 	public boolean isAccountNonExpired() {
@@ -178,10 +183,34 @@ public class Users implements UserDetails {
 	}
 
 
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	
+	public Users() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
+
+	public Users(String nom, String prenom, String password, String username, String email, String telephone,
+			boolean enabled, Pharmacie pharmacie, Set<UserRole> userRoles) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.password = password;
+		this.username = username;
+		this.email = email;
+		this.telephone = telephone;
+		this.enabled = enabled;
+		this.pharmacie = pharmacie;
+		this.userRoles = userRoles;
+	}
+
+
+	public Pharmacie getPharmacie() {
+		return pharmacie;
+	}
+
+	public void setPharmacie(Pharmacie pharmacie) {
+		this.pharmacie = pharmacie;
+	}
 }

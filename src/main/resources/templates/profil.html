@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" >
+<meta charset="UTF-8" />
+<head th:replace="common/header :: common-header"/>
+<body>
+<head th:replace="common/header :: navbar"/>
+<section class="section">
+	<div class="form_profil">
+		<h2>détails du profil</h2>
+		<form class="form-horizontal" method="post" th:action="@{/profil}" accept-charset="utf-8">
+			<input type="hidden" name="userId" th:value="${user.userId}" /><br/>
+			<label for="nom" >Nom :</label> <input type="text" th:value="${user.nom}" id="nom" name="nom" roleId="nom" placeholder="Entrer votre Nom" /><br/>
+		    <label for="prenom" >Prénom :</label> <input type="text" th:value="${user.prenom}" id="prenom" name="prenom" roleId="prenom" placeholder="Entrer votre Prénom" /><br/>
+<!-- 		    <label for="password" >Mot de passe :</label> <input type="text" th:value="${user.password}" id="password" data-th-field="*{password}" name="password" roleId="password" /><br/>    -->
+		    <label for="username" >Nom d'utilisateur :</label> <input type="text" th:value="${user.username}" id="username" name="username" roleId="username" placeholder="Entrer votre Nom d'utilisateur" /><br/>
+		    <label for="email" >Email :</label> <input type="text" th:value="${user.email}" id="email" name="email" roleId="email" placeholder="Entrer votre Email" /><br/>
+		    <label for="telephone" >Téléphone :</label> <input type="text" th:value="${user.telephone}" id="telephone" name="telephone" roleId="telephone" placeholder="Entrer votre Téléphone" /><br/>
+		    <button type="submit" class="envoyer">Envoyer</button>
+		</form>
+	</div>
+</section>
+<table id="keywords" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+<!--         <th>Id utilisateur</th> -->
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Nom d'utilisateur</th>
+        <th>Email</th>
+        <th>Téléphone</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="users : ${user}">
+<!-- <!--         <td th:text="${users.userId}"></td> -->
+        <td th:text="${users.nom}"></td>
+        <td th:text="${users.prenom}"></td>
+        <td th:text="${users.username}"></td>
+        <td th:text="${users.email}"></td>
+        <td th:text="${users.telephone}"></td>
+        <td>
+        	<a th:href="@{/modifierprofil?userid=}+${users.userId}" class="btn btn-danger" >Modifier</a>
+        </td>
+      </tr>
+     </tbody>
+ </table>
+</body>
+</html>

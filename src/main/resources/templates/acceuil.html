@@ -1,26 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des produits</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.min.css"
-	th:href="@{/css/bootstrap/bootstrap.min.css}"/>
-	<link rel="stylesheet" type="text/css" href="../static/css/style.css"
-		th:href="@{/css/style.css}"/>
-	<script type="text/javascript" src="style.js"></script>
-</head>
+<meta charset="UTF-8" />
+<head th:replace="common/header :: common-header"/>
 <body>
-	<header>
-		<div class="container">
-	      <ul class="nav nav-tabs">
-	          <li class="nav-item"><a class="nav-link active" th:href="@{/acceuil}">Acceuil</a></li>
-	          <li class="nav-item"><a class="nav-link" th:href="@{/client}">Clients</a></li>
-	          <li class="nav-item"><a class="nav-link" th:href="@{/produit}">Produits</a></li>
-	          <li class="nav-item"><a class="nav-link " th:href="@{/inscription}">Inscription</a></li>
-	          <li class="nav-item"><a class="nav-link " th:href="@{/pharmacie}">Pharmacies</a></li>
-	        </ul>
-	    </div>
-	</header>
-	<h1>BIENVENU</h1>
+<head th:replace="common/header :: navbar"/>
+<h1>BIENVENUE</h1>
 </body>
 </html>

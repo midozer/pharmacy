@@ -1,20 +1,18 @@
 package sid.pharmacy.Controllers;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.util.WebUtils;
 
 import sid.pharmacy.Model.Produit;
-import sid.pharmacy.Model.Users;
 import sid.pharmacy.Service.ProduitService;
 import sid.pharmacy.dao.ProduitDao;
 
@@ -37,6 +35,11 @@ public class ProduitController {
 	 * model.addAttribute("listProduit", produitService.findAll()); return
 	 * "produit"; }
 	 */
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String viewHomePage(Model model) {
+		return findPaginated(1, "nomProduit", "asc", model);		
+	}
 	
 	@RequestMapping(value = "/produit", method = RequestMethod.POST)
 	public String saveProduit(@ModelAttribute("produit") Produit produits)
@@ -90,6 +93,27 @@ public class ProduitController {
 		List<Produit> produit = produitService.findBynomProduit(nomProduit);
 		model.addAttribute("produit", new Produit());
 		model.addAttribute("listProduit", produit);
+		return "produit";
+	}
+	
+	@RequestMapping(value = "/page/{pageNo}", method = RequestMethod.GET)
+	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
+			@RequestParam(name = "sortField") String sortField,
+			@RequestParam(name = "sortDir") String sortDir,
+			Model model)
+	{
+		int pageSize = 5;
+		Page<Produit> page = produitService.findPaginated(pageNo, pageSize, sortField, sortDir);
+		List<Produit> listProduits = page.getContent();
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+		
+		model.addAttribute("listProduits", listProduits);
 		return "produit";
 	}
 	

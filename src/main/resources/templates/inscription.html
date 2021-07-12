@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <meta charset="UTF-8" />
 <head th:replace="common/header :: common-header"/>
 <body>
@@ -7,12 +8,26 @@
 <div class="form_user">
 	<h2>Créer un nouveau utilisateur</h2>
 	<form class="form-horizontal" method="post" th:action="@{/inscription}">
-		<label for="nom" >Nom :</label> <input type="text" id="nom" th:value="${user.nom}" name="nom" roleId="nom"/><br/>
-	    <label for="prenom" >Prenom :</label> <input type="text" id="prenom" th:value="${user.prenom}" name="prenom" roleId="prenom" /><br/>
-	    <label for="password" >Mot de passe :</label> <input type="password" id="password" th:value="${user.password}" name="password" roleId="password" /><br/>   
-	    <label for="username" >Nom d'utilisateur :</label> <input type="text" id="username" th:value="${user.username}" name="username" roleId="username" /><br/> 
-	    <label for="email" >Email :</label><input type="text" id="email" th:value="${user.email}" name="email" roleId="email" /><br/>
-	    <label for="telephone" >Téléphone :</label><input type="text" id="telephone" th:value="${user.telephone}" name="telephone" roleId="telephone" /><br/>
+		<input type="hidden" th:value="${user.userId}" id="userId" name="userId" roleId="userId"/><br/>
+		<label for="nom" >Nom :</label> <input type="text" th:value="${user.nom}" id="nom" name="nom" roleId="nom" placeholder="Entrer votre nom"/><br/>
+	    <label for="prenom" >Prenom :</label> <input type="text" th:value="${user.prenom}" id="prenom" name="prenom" roleId="prenom" placeholder="Entrer votre prénom"/><br/>
+	    <label for="password" >Mot de passe :</label> <input type="password" th:value="${user.password}" id="password" name="password" roleId="password" placeholder="Entrer votre mot de passe"/><br/>   
+	    <label for="username" >Nom d'utilisateur :</label> <input type="text" th:value="${user.username}" id="username" name="username" roleId="username" placeholder="Entrer votre nom d'utilisateur"/><br/> 
+	    <label for="email" >Email :</label><input type="text" th:value="${user.email}" id="email" name="email" roleId="email" placeholder="Entrer votre email"/><br/>
+	    <label for="telephone" >Téléphone :</label><input type="text" th:value="${user.telephone}" id="telephone" name="telephone" roleId="telephone" placeholder="Entrer votre téléphone"/><br/>
+	    <!-- <label for="idPharmacie" >Pharmacie :</label> -->
+	    <!-- <select th:value="${user.idPharmacie}" name="idPharmacie" id="idPharmacie">
+		    			<option value=""> -- Séléctionner -- </option>
+                        <option th:each="pharmacies : ${pharmacie}"
+                        th:value="${pharmacies.idPharmacie}"
+                        th:text="${pharmacies.nomPharmacie}">
+                        </option>
+        </select> -->
+	    <!-- <label for="role" >Role :</label><select th:value="${user.role}" name="role" id="role">
+            <option disabled="disabled" selected="selected"> -- Séléctionner -- </option>
+            <option>PHARMACIEN</option>
+            <option>admin</option>
+        </select> -->
 	    <button type="submit" class="envoyer">Envoyer</button>
 	</form>
 </div>

@@ -21,21 +21,41 @@ public class StockServiceImp implements StockService  {
 	private StockDao stockDao;
 
 	@Override
-	public List<Stock> findByPharmacie(Pharmacie pharmacie) {
-		return stockDao.findByPharmacie(pharmacie);
-	}
-
-
-	@Override
 	public List<Stock> findAll() {
 		return stockDao.findAll();
 	}
 
 
 	@Override
-	public Stock save(Stock stock) {
-		return stockDao.save(stock);
+	public void deleteByQuantite(int quantite) {
+		stockDao.deleteByQuantite(quantite);
 	}
+
+	@Override
+	public void updateQuantite(int quantite) {
+		stockDao.findByQuantite(quantite).getQuantite();
+	}
+
+
+	@Override
+	public Stock findByQuantite(int quantite) {
+		return stockDao.findByQuantite(quantite);
+	}
+
+
+	@Override
+	public Pharmacie findByNomPharmacie(String nomPharmacie) {
+		return stockDao.findByNomPharmacie(nomPharmacie);
+	}
+
+
+	@Override
+	public List<Produit> findByNomProduit(String nomProduit) {
+		return stockDao.findByNomProduit(nomProduit);
+	}
+
+	
+	
 	
 	
 }

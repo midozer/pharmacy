@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<meta charset="UTF-8" />
+<head th:replace="common/header :: common-header"/>
+<body>
+<head th:replace="common/header :: navbar"/>
+<body>
+	<select th:value="${user.idPharmacie}" name="idPharmacie" id="idPharmacie">
+		    			<option value=""> -- Séléctionner -- </option>
+                        <option th:each="pharmacies : ${pharmacie}"
+                        th:value="${pharmacies.idPharmacie}"
+                        th:text="${pharmacies.nomPharmacie}">
+                        </option>
+   	</select>
+</body>
+</html>

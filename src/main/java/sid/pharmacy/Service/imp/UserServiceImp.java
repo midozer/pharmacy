@@ -1,12 +1,15 @@
 package sid.pharmacy.Service.imp;
 
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +21,7 @@ import sid.pharmacy.Model.Users;
 import sid.pharmacy.Service.UserService;
 import sid.pharmacy.dao.RoleDao;
 import sid.pharmacy.dao.UserDao;
+import sid.pharmacy.security.Role;
 import sid.pharmacy.security.UserRole;
 
 @Service
@@ -53,11 +57,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
 	
 	public void save(Users user) {
         userDao.save(user);
-		/*
-		 * user.setPassword(passwordEncoder.encode(user.getPassword()));
-		 * user.setRoles(new HashSet<>(roleDao.findAll()));
-		 */
-        //userDao.save(user);
     }
 	 
 
@@ -107,5 +106,12 @@ public class UserServiceImp implements UserService, UserDetailsService {
 	public Users deleteByUserId(Long userId) {
 		return userDao.deleteByUserId(userId);
 	}
+	
+	public Users saveUser (Users user) {
+        return userDao.save(user);
+    }
 
+	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+	}
 }

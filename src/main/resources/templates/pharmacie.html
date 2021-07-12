@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <meta charset="UTF-8" />
 <head th:replace="common/header :: common-header"/>
 <body>
 <head th:replace="common/header :: navbar"/>
-	<section class="section">
+	<div sec:authorize="isAuthenticated()">
+		<section class="section">
 		<div class="form_pharmacie">
 			<h2>Créer une nouvelle pharmacie</h2>
 			<form class="form-horizontal" method="post" th:action="@{/pharmacie}" th:object="${pharmacie}" accept-charset="utf-8">
@@ -27,8 +29,7 @@
 		        <th>Téléphone Pharmacie</th>
 		        <th>Adresse Pharmacie</th>
 		        <th>Ville Pharmacie</th>
-		        <th>Modifier</th>
-        		<th>Supprimer</th>
+		        <th>Action</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -38,15 +39,17 @@
 		        <td th:text="${pharmacies.telePharmacie}"></td>
 		        <td th:text="${pharmacies.adressePharmacie}"></td>
 		        <td th:text="${pharmacies.villePharmacie}"></td>
+		        <!-- <td sec:authorize="hasAnyAuthority('admin')"> -->
 		        <td>
 		        	<a th:href="@{/modifierpharmacie?nompharmacie=}+${pharmacies.nomPharmacie}" class="btn btn-danger" >Modifier</a>
-		        </td>
-		        <td>
+		        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		        	<a th:href="@{/supprimerpharmacie?nompharmacie=}+${pharmacies.nomPharmacie}" class="btn btn-danger">Supprimer</a>
 		        </td>
 		      </tr>
 		     </tbody>
 	  </table>
 	 </div> 
+	</div>
+	
 </body>
 </html>

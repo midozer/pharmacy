@@ -1,17 +1,11 @@
 package sid.pharmacy.Model;
 
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Produit{
@@ -24,11 +18,13 @@ public class Produit{
 	private String description;
 	private Double prix;
 	
-	
 	/*
+	 * 
 	 * @ManyToOne(fetch = FetchType.LAZY)
 	 * 
-	 * @JoinColumn(name = "idStock", nullable = false) private Stock stock;
+	 * @JoinColumn(name = "stockId", nullable = false) private StockId stockId;
+	 * 
+	 * 
 	 */
 
 	/*
@@ -39,6 +35,7 @@ public class Produit{
 	 * ) private List<Produit> produits = new ArrayList<>();
 	 */
 	
+
 	public Produit() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -46,18 +43,25 @@ public class Produit{
 
 
 
+	
 
-	public Produit(String nomProduit, Date dateExpiration, String typeProduit, String description, Double prix) {
+
+
+
+	public Produit(String nomProduit, Date dateExpiration, String typeProduit, String description,
+			Double prix/*
+						 * , StockId stockId
+						 */) {
 		super();
 		this.nomProduit = nomProduit;
 		this.dateExpiration = dateExpiration;
 		this.typeProduit = typeProduit;
 		this.description = description;
 		this.prix = prix;
+		//this.stockId = stockId;
 	}
-
-
-
+	
+	
 
 	public Long getCodeProduit() {
 		return codeProduit;

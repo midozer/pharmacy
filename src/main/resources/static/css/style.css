@@ -9,6 +9,10 @@ h1
 {
 	text-align: center;
 }
+h2
+{
+	font-size: 30px;
+}
 form
 {
 	margin: 20px 60px;
@@ -25,6 +29,13 @@ table
     text-align: center;
     margin-right: auto;
 	margin-left: auto;
+}
+.stock
+{
+	position: absolute;
+    top: 70%;
+    width: 60%;
+    left: 17%;
 }
 .userConnected
 {
@@ -72,13 +83,13 @@ tr th , tr td
     margin: 16px 0px 0px 80px;
     width: 100px;
 }
-.form_user, .form_pharmacie, .form_produit, .form_profil
+.form_user, .form_pharmacie, .form_produit, .form_profil, .form_stock
 {
 	position: absolute;
-	width: 500px;
+	width: 350px;
 	height: 300px;
 	z-index: 15;
-	margin: 40px 0 0 155px;
+	margin: 20px 0px;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Titillium+Web");

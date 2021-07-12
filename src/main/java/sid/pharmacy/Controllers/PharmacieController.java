@@ -1,5 +1,8 @@
 package sid.pharmacy.Controllers;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,9 @@ import sid.pharmacy.Model.Pharmacie;
 import sid.pharmacy.Model.Produit;
 import sid.pharmacy.Service.PharmacieService;
 import sid.pharmacy.dao.PharmacieDao;
+import sid.pharmacy.dao.RoleDao;
+import sid.pharmacy.security.Role;
+import sid.pharmacy.security.UserRole;
 
 @Controller
 public class PharmacieController {
@@ -22,18 +28,40 @@ public class PharmacieController {
 	@Autowired
 	private PharmacieDao pharmacieDao;
 	
+	@Autowired
+	private RoleDao roleDao;
+	
 	/*
 	 * @RequestMapping("/") public String home() { return "redirect:/index"; }
 	 * 
 	 * @RequestMapping("/index") public String index() { return "index"; }
 	 */
 	@RequestMapping(value = "/pharmacie", method = RequestMethod.POST)
-	public String savePharmacie(@ModelAttribute("pharmacie") Pharmacie pharmacie)
+	public String savePharmacie(@ModelAttribute("pharmacie") Pharmacie pharmacie, Model model)
 	{
+		/*
+		 * Set<UserRole> userRoles = new HashSet<>(); Role role =
+		 * roleDao.findByName("admin"); userRoles.add(new UserRole(users, role));
+		 */
+		
+		//Pharmacie pharmacies = pharmacieService.findBynomPharmacie(pharmacie.getNomPharmacie());
+		/*
+		 * pharmacies.setIdPharmacie(pharmacie.getIdPharmacie());
+		 * pharmacies.setNomPharmacie(pharmacie.getNomPharmacie());
+		 * pharmacies.setTelePharmacie(pharmacie.getTelePharmacie());
+		 * pharmacies.setAdressePharmacie(pharmacie.getAdressePharmacie());
+		 * pharmacies.setVillePharmacie(pharmacie.getAdressePharmacie());
+		 */
+		
+		
+		
 		System.out.println(pharmacie.toString());
 		System.out.println("test");
 		
+		//model.addAttribute("pharmacies", pharmacies);
+		
 		pharmacieDao.save(pharmacie);
+		
 		return "redirect:/pharmacie";
 	}
 	
@@ -60,5 +88,11 @@ public class PharmacieController {
 	{
 		pharmacieService.deleteBynomPharmacie(nomPharmacie);
 		return "redirect:/pharmacie";
+	}
+	
+	@RequestMapping(value = "/403", method = RequestMethod.GET)
+	public String accesRefuse()
+	{
+		return "403";
 	}
 }

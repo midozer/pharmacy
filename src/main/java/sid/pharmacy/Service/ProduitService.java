@@ -1,7 +1,10 @@
 package sid.pharmacy.Service;
 
 import java.util.List;
+
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
 import sid.pharmacy.Model.Produit;
 
 @Service
@@ -26,4 +29,6 @@ public interface ProduitService {
 	  public void deleteBynomProduit(String nomProduit);
 	  
 	  public void deleteBycodeProduit(Long codeProduit);
+	  
+	  Page<Produit> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 }

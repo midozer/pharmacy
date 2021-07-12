@@ -1,73 +1,116 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" >
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
 <meta charset="UTF-8" />
 <head th:replace="common/header :: common-header"/>
 <body>
 <head th:replace="common/header :: navbar"/>
+<div sec:authorize="isAuthenticated()">
+	<section class="section">
+		<div class="form_produit">
+			<h2>Créer un nouveau produit</h2>
+			<form class="form-horizontal" method="post" data-th-action="@{/produit}" data-th-object="${produit}" accept-charset="utf-8">
+				<input type="hidden" data-th-field="*{codeProduit}" name="codeProduit" roleId="codeProduit"/><br/>
+				<label for="nomProduit" >Nom du produit :</label> <input type="text" id="nomProduit" data-th-field="*{nomProduit}" name="nomProduit" roleId="nomProduit"/><br/>
+			    <label for="dateExpiration" >Date d'expiration :</label> <input type="text" id="dateExpiration" data-th-field="*{dateExpiration}" name="dateExpiration" roleId="dateExpiration" /><br/>
+			    <label for="typeProduit" >Type de produit :</label> <input type="text" id="typeProduit" data-th-field="*{typeProduit}" name="typeProduit" roleId="typeProduit" /><br/>   
+			    <label for="description" >Description :</label> <input type="text" id="description" data-th-field="*{description}" name="description" roleId="description" /><br/>
+			    <label for="prix" >Prix :</label> <input type="text" id="prix" data-th-field="*{prix}" name="prix" roleId="prix" /><br/>
+			    <button type="submit" class="envoyer">Envoyer</button>
+			    
+			</form>
+		</div>
+	</section>
+	<div id="wrapper">
+		<h1><a class="navbar-brand" href="#" th:href="@{/produit}">Liste des produits</a></h1>
+		  <form class="form-horizontal" method="get" th:action="@{/chercherproduitbytype}" accept-charset="utf-8">
+		  		<label for="typeProduitRecherche" >Type de produit :</label> <input type="text" id="typeProduitRecherche" th:value="${typeProduitRecherche}" name="typeProduitRecherche" roleId="typeProduitRecherche" /> 
+		<!--   	<a th:href="@{/chercherproduit?typeproduit=}+${chercherproduit.typeProduit}" class="btn btn-danger" >Rechercher</a> -->
+		<!-- 		<a th:href="@{/chercherproduit?typeproduit=}+${typeProduitRecherche}" >Rechercher</a> -->
+			<button type="submit" >Rechercher</button>
+		  </form>
+		<form class="form-horizontal" method="get" th:action="@{/chercherproduitbynom}" accept-charset="utf-8">
+		  		<label for="nomProduitRecherche" >Nom du produit :</label> <input type="text" id="nomProduitRecherche" th:value="${nomProduitRecherche}" name="nomProduitRecherche" roleId="nomProduitRecherche" /> 
+		<!--   	<a th:href="@{/chercherproduit?typeproduit=}+${chercherproduit.typeProduit}" class="btn btn-danger" >Rechercher</a> -->
+		<!-- 		<a th:href="@{/chercherproduit?typeproduit=}+${typeProduitRecherche}" >Rechercher</a> -->
+			<button type="submit" >Rechercher</button>
+		</form> 
+		<table id="keywords" cellspacing="0" cellpadding="0">
+		    <thead>
+		      <tr>
+		<!--         <th>Id Produit</th> -->
+		        <th>
+		        	<a th:href="@{'/page/' + ${currentPage} + '?sortField=nomProduit&sortDir=' + ${reverseSortDir}}">
+		        		Nom produit
+		        	</a>
+		        </th>
+		        <th>
+		        	<a th:href="@{'/page/' + ${currentPage} + '?sortField=dateExpiration&sortDir=' + ${reverseSortDir}}">
+		        		Date d'expiration
+		        	</a>
+		        </th>
+		        <th>
+		        	<a th:href="@{'/page/' + ${currentPage} + '?sortField=typeProduit&sortDir=' + ${reverseSortDir}}">
+		        		Type produit
+		        	</a>
+		        </th>
+		        <th>
+		        	<a th:href="@{'/page/' + ${currentPage} + '?sortField=description&sortDir=' + ${reverseSortDir}}">
+		        		Description
+		        	</a>
+		        </th>
+		        <th>
+		        	<a th:href="@{'/page/' + ${currentPage} + '?sortField=prix&sortDir=' + ${reverseSortDir}}">
+		        		Prix
+		        	</a>
+		        </th>
+		        <th>Modifier</th>
+		        <th>Supprimer</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr th:each="produit : ${listProduit}">
+		<!--         <td th:text="${produit.codeProduit}"></td> -->
+		        <td th:text="${produit.nomProduit}"></td>
+		        <td th:text="${produit.dateExpiration}"></td>
+		        <td th:text="${produit.typeProduit}"></td>
+		        <td th:text="${produit.description}"></td>
+		        <td th:text="${produit.prix}"></td>
+		        <td>
+		        	<a th:href="@{/modifierproduit?codeproduit=}+${produit.codeProduit}" class="btn btn-danger" >Modifier</a>
+		        </td>
+		        <td>
+		        	<a th:href="@{/supprimerproduit?codeproduit=}+${produit.codeProduit}" class="btn btn-danger">Supprimer</a>
+		        </td>
+		      </tr>
+		     </tbody>
+		</table>
+		<div th:if = "${totalPages > 1}">
+			<div class = "row col-sm-10">
+				<div class = "col-sm-2">
+					Total Rows: [[${totalItems}]] 
+				</div>
+				<div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+				</div>
+				<div class = "col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<span th:unless="${currentPage < totalPages}">Next</span>
+				</div>
+				
+				 <div class="col-sm-1">
+		  				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+					<span th:unless="${currentPage < totalPages}">Last</span>
+		 				 </div>
+			</div>
+		</div>
+	</div> 
+</div>
 
-<section class="section">
-	<div class="form_produit">
-		<h2>Créer un nouveau produit</h2>
-		<form class="form-horizontal" method="post" data-th-action="@{/produit}" data-th-object="${produit}" accept-charset="utf-8">
-			<input type="hidden" data-th-field="*{codeProduit}" name="codeProduit" roleId="codeProduit"/><br/>
-			<label for="nomProduit" >Nom du produit :</label> <input type="text" id="nomProduit" data-th-field="*{nomProduit}" name="nomProduit" roleId="nomProduit"/><br/>
-		    <label for="dateExpiration" >Date d'expiration :</label> <input type="text" id="dateExpiration" data-th-field="*{dateExpiration}" name="dateExpiration" roleId="dateExpiration" /><br/>
-		    <label for="typeProduit" >Type de produit :</label> <input type="text" id="typeProduit" data-th-field="*{typeProduit}" name="typeProduit" roleId="typeProduit" /><br/>   
-		    <label for="description" >Description :</label> <input type="text" id="description" data-th-field="*{description}" name="description" roleId="description" /><br/>
-		    <label for="prix" >Prix :</label> <input type="text" id="prix" data-th-field="*{prix}" name="prix" roleId="prix" /><br/>
-		    <button type="submit" class="envoyer">Envoyer</button>
-		</form>
-	</div>
-</section>
-<div id="wrapper">
-  <h1>Liste des produits</h1>
-  <form class="form-horizontal" method="get" th:action="@{/chercherproduitbytype}" accept-charset="utf-8">
-  		<label for="typeProduitRecherche" >Type de produit :</label> <input type="text" id="typeProduitRecherche" th:value="${typeProduitRecherche}" name="typeProduitRecherche" roleId="typeProduitRecherche" /> 
-<!--   	<a th:href="@{/chercherproduit?typeproduit=}+${chercherproduit.typeProduit}" class="btn btn-danger" >Rechercher</a> -->
-<!-- 		<a th:href="@{/chercherproduit?typeproduit=}+${typeProduitRecherche}" >Rechercher</a> -->
-	<button type="submit" >Rechercher</button>
-  </form>
-  <form class="form-horizontal" method="get" th:action="@{/chercherproduitbynom}" accept-charset="utf-8">
-  		<label for="nomProduitRecherche" >Nom du produit :</label> <input type="text" id="nomProduitRecherche" th:value="${nomProduitRecherche}" name="nomProduitRecherche" roleId="nomProduitRecherche" /> 
-<!--   	<a th:href="@{/chercherproduit?typeproduit=}+${chercherproduit.typeProduit}" class="btn btn-danger" >Rechercher</a> -->
-<!-- 		<a th:href="@{/chercherproduit?typeproduit=}+${typeProduitRecherche}" >Rechercher</a> -->
-	<button type="submit" >Rechercher</button>
-  </form> 
-	<div>
-		
-	</div>
-  <table id="keywords" cellspacing="0" cellpadding="0">
-    <thead>
-      <tr>
-<!--         <th>Id Produit</th> -->
-        <th>Nom produit</th>
-        <th>Date d'expiration</th>
-        <th>Type produit</th>
-        <th>Description</th>
-        <th>Prix</th>
-        <th>Modifier</th>
-        <th>Supprimer</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr th:each="produit : ${listProduit}">
-<!--         <td th:text="${produit.codeProduit}"></td> -->
-        <td th:text="${produit.nomProduit}"></td>
-        <td th:text="${produit.dateExpiration}"></td>
-        <td th:text="${produit.typeProduit}"></td>
-        <td th:text="${produit.description}"></td>
-        <td th:text="${produit.prix}"></td>
-        <td>
-        	<a th:href="@{/modifierproduit?codeproduit=}+${produit.codeProduit}" class="btn btn-danger" >Modifier</a>
-        </td>
-        <td>
-        	<a th:href="@{/supprimerproduit?codeproduit=}+${produit.codeProduit}" class="btn btn-danger">Supprimer</a>
-        </td>
-      </tr>
-     </tbody>
- </table>
-</div> 
+
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>

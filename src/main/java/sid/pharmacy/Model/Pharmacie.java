@@ -2,9 +2,12 @@ package sid.pharmacy.Model;
 
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -18,6 +21,13 @@ public class Pharmacie{
 	private int telePharmacie;
 	private String adressePharmacie;
 	private String villePharmacie;
+	
+	
+	/*
+	 * @OneToOne(fetch = FetchType.LAZY, optional = false)
+	 * 
+	 * @JoinColumn(name = "stock_id", nullable = false) private StockId stockId;
+	 */
 	
 	/*
 	 * @JsonIgnore private Stock stock;

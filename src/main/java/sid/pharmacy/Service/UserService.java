@@ -16,7 +16,10 @@ public interface UserService {
     public Users findByuserId(Long id);
     public List<Users> findAll();
     public Users deleteByUserId(Long userId);
+    
     public void save (Users user);
-    public Users createUser(Users user, Set<UserRole> userRoles);
+    Users createUser(Users user, Set<UserRole> userRoles);
+    Users saveUser (Users user); 
+    
 	UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 }

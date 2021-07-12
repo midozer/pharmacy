@@ -15,12 +15,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.data.annotation.Transient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import sid.pharmacy.security.Authority;
+import sid.pharmacy.security.Role;
 import sid.pharmacy.security.UserRole;
 
 @Entity
@@ -36,16 +38,43 @@ public class Users implements UserDetails {
 	private String telephone;
 	private boolean enabled = true;
 	
+	@Transient
+	private String roles;
+	
+	
 	@OneToOne
-	@JoinColumn(name = "idPharmacie")
-	private Pharmacie pharmacie;
+	@JoinColumn(name = "idPharmacie") 
+	private Pharmacie idPharmacie;
+	 
 	
 	
+	/*
+	 * @OneToOne
+	 * 
+	 * @JoinColumn(name = "nomPharmacie") private Pharmacie nomPharmacie;
+	 */
+
+
+	public String getRoles() {
+		return roles;
+	}
+
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name = "name") private Role role;
+	 */
+	
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER) //un utilisateur peut avoir plusieur role
 	@JsonIgnore //lors de lecture ou ecriture Jsonignore va ignorer la liste des roles
@@ -192,7 +221,7 @@ public class Users implements UserDetails {
 
 
 	public Users(String nom, String prenom, String password, String username, String email, String telephone,
-			boolean enabled, Pharmacie pharmacie, Set<UserRole> userRoles) {
+			boolean enabled, Pharmacie idPharmacie/* , Pharmacie nomPharmacie */,  Set<UserRole> userRoles) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -201,16 +230,30 @@ public class Users implements UserDetails {
 		this.email = email;
 		this.telephone = telephone;
 		this.enabled = enabled;
-		this.pharmacie = pharmacie;
+		this.idPharmacie = idPharmacie;
+		//this.nomPharmacie = nomPharmacie;
+		//this.role = role;
 		this.userRoles = userRoles;
 	}
+	 
+	
+	  public Pharmacie getIdPharmacie() { return idPharmacie; }
+	  
+	  
+	  public void setIdPharmacie(Pharmacie idPharmacie) { this.idPharmacie =
+	  idPharmacie; }
+	 
 
 
-	public Pharmacie getPharmacie() {
-		return pharmacie;
-	}
+	
+	/*
+	 * public Pharmacie getNomPharmacie() { return nomPharmacie; }
+	 * 
+	 * 
+	 * public void setNomPharmacie(Pharmacie nomPharmacie) { this.nomPharmacie =
+	 * nomPharmacie; }
+	 */
+	 
 
-	public void setPharmacie(Pharmacie pharmacie) {
-		this.pharmacie = pharmacie;
-	}
+	
 }

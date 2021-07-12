@@ -2,6 +2,8 @@ package sid.pharmacy.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -24,4 +26,6 @@ public interface ProduitDao extends CrudRepository<Produit, Long> {
 	  void deleteBynomProduit(String nomProduit);
 	  
 	  void deleteBycodeProduit(Long codeProduit);
+
+	Page<Produit> findAll(Pageable pageable);
 }

@@ -1,39 +1,61 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
-    
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des produits</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.min.css"
-	th:href="@{/css/bootstrap/bootstrap.min.css}"/>
-	<link rel="stylesheet" type="text/css" href="../static/css/style.css"
-		th:href="@{/css/style.css}"/>
-	<script type="text/javascript" src="style.js"></script>
-</head>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<meta charset="UTF-8" />
+<head th:replace="common/header :: common-header"/>
 <body>
-	<header>
-		<div class="container">
-	      <ul class="nav nav-tabs">
-	          <li class="nav-item"><a class="nav-link active" th:href="@{/acceuil}">Acceuil</a></li>
-	          <li class="nav-item"><a class="nav-link" th:href="@{/client}">Clients</a></li>
-	          <li class="nav-item"><a class="nav-link" th:href="@{/produit}">Produits</a></li>
-	          <li class="nav-item"><a class="nav-link " th:href="@{/inscription}">Inscription</a></li>
-	          <li class="nav-item"><a class="nav-link " th:href="@{/pharmacie}">Pharmacies</a></li>
-	      </ul>
-	    </div>
-	</header>
+<head th:replace="common/header :: navbar"/>
+<body>
+	
 	<section class="section">
 		<div class="form_stock">
-			<h2>Ajouter un nouveau produit</h2>
-			<form class="form-horizontal" method="post" data-th-action="@{/stock}" data-th-object="${stock}" accept-charset="utf-8">
-				<input type="hidden" data-th-field="*{idStock}" name="idStock" roleId="idStock"/><br/>
-				<label for="pharmacie" >Pharmacie :</label> <select th:field="*{pharmacie}">
-                           <option value="">Séléctionner une pharmacie</option>
-                           <option th:each="stock : ${listProduct}" th:value="${stock.pharmacie}" th:text="${stock.pharmacie}" />
-                        </select><br/>
+			<h2>Ajouter un nouveau produit au stock</h2>
+			<form class="form-horizontal" method="post" th:action="@{/stock}" accept-charset="utf-8">
+				<!-- <label for="idStock" >Id :</label><input type="text" id="idStock" th:field="*{stock.idStock}" name="idStock" roleId="idStock"/><br/> -->
+				<label for="nomPharmacie" >Pharmacie :</label>
+			    <select th:value="${stock.nomPharmacie}" name="nomPharmacie" id="nomPharmacie">
+			    			<option value=""> -- Séléctionner -- </option>
+	                        <option th:each="pharmacies : ${pharmacie}"
+	                        th:value="${pharmacies.idPharmacie}"
+	                        th:text="${pharmacies.nomPharmacie}">
+	                        </option>
+	                        
+	            </select>
+	            <label for="nomProduit" >Produit :</label>
+			    <select th:value="${stock.nomProduit}" name="nomProduit" id="nomProduit">
+			    			<option value=""> -- Séléctionner -- </option>
+	                        <option th:each="produits : ${produit}"
+	                        th:value="${produits.codeProduit}"
+	                        th:text="${produits.nomProduit}">
+	                        </option>
+	                        
+	            </select>
+	            <label for="quantite" >Quantité :</label><input type="text" th:field="*{stock.quantite}" name="quantite" roleId="quantite"/><br/>
 			    <button type="submit" class="envoyer">Envoyer</button>
 			</form>
 		</div>
 	</section>
+	<table id="keywords" cellspacing="0" cellpadding="0" class="stock">
+	    <thead>
+	      <tr>
+	        <!-- <th>Id Stock</th> -->
+	        <th>Pharmacie</th>
+	        <th>Produit</th>
+	        <th>Quantité</th>
+	        <th>Modifier</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr th:each="stocks : ${detailstStock}" >
+	        <!-- <td th:text="${stocks.idStock}"></td> -->
+	        <td th:text="${stocks.nomPharmacie}"></td>
+	        <td th:text="${stocks.nomProduit}"></td>
+	        <td th:text="${stocks.quantite}"></td>
+	        <td>
+	        	<a th:href="@{/modifierstock?quantitee=}+${stocks.quantite}" class="btn btn-danger" >Modifier</a>
+	        </td>
+	      </tr>
+	     </tbody>
+	 </table>
 </body>
 </html>

@@ -3,10 +3,15 @@ package sid.pharmacy.Service.imp;
 
 import java.util.List;
 
+import javax.naming.NameNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sid.pharmacy.Model.Pharmacie;
+import sid.pharmacy.Model.Users;
 import sid.pharmacy.Service.PharmacieService;
 import sid.pharmacy.dao.PharmacieDao;
 
@@ -57,5 +62,13 @@ public class PharmacieServiceImp implements PharmacieService {
 		pharmacieDao.findByidPharmacie(idPharmacie);
 	}
 
+	@Override
+    public UserDetails loadPharmacieByName(String nomPharmacie) throws NameNotFoundException {
+        Pharmacie pharmacie = pharmacieDao.findBynomPharmacie(nomPharmacie);
+        if (pharmacie == null) {
+            throw new UsernameNotFoundException("Pharmacie not found");
+        }
+        return new Users();
+    }
 	
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:fragment="common-header">
 <!--   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> -->
@@ -19,14 +20,22 @@
           <li class="nav-item"><a class="nav-link" th:href="@{/produit}">Produits</a></li>
           <li class="nav-item"><a class="nav-link" th:href="@{/inscription}">Inscription</a></li>
           <li class="nav-item"><a class="nav-link" th:href="@{/pharmacie}">Pharmacies</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/stock}">Stock</a></li>
           <li class="nav-item"><a class="nav-link" th:href="@{/profil}">Profil</a></li>
       </ul>
       <div sec:authorize="isAuthenticated()" class="logged">
         <form id="logoutForm" method="POST" th:action="@{/logout}">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        	Logged user : <b><span sec:authentication="name"></span></b>
+        	&nbsp;&nbsp;
+        	<!-- <span sec:authentication="principal.authorities">Role</span> -->
+        	
+        	<!-- <label th:text="${user.roles}" ></label> -->
+        	
+            <input type="submit" name="${_csrf.parameterName}" value="Logout"/>
         </form>
 
-        Logged user : <span sec:authentication="name"></span> | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
+<!--         Logged user : <span sec:authentication="name"></span> , <span sec:authentication="principal.authorities">Roles</span> | <a onclick="document.forms['logoutForm'].submit()">Logout</a> -->
+        
       </div>
     </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

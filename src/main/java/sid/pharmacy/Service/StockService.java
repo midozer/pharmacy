@@ -12,8 +12,19 @@ import sid.pharmacy.Model.Stock;
 @Service
 public interface StockService {
 	
-	public List<Stock> findByPharmacie(Pharmacie pharmacie);
+	//public Stock findByIdStock(Long idStock);
+	
+	public Pharmacie findByNomPharmacie(String nomPharmacie);
+	
+	public Stock findByQuantite(int quantite);
+	
+	public List<Produit> findByNomProduit(String nomProduit);
+	
 	public List<Stock> findAll();
+	
+	public void deleteByQuantite(int quantite);
 
-	public Stock save(Stock stock);
+	//public Stock saveQuantite(int quantite);
+	
+	public void updateQuantite(int quantite);
 }
